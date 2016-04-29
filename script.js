@@ -112,6 +112,9 @@ document.addEventListener('DOMContentLoaded', function () {
             textArea.textContent = '';
             simulation.reset();
          });
+         
+         // X is potential number for dice roll
+         // Y would be count of actual roll value
       }());
    }());
 }, false);

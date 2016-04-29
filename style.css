@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+/*
+CS 3312, spring 2016
+Final Project
+*/
+
+/*Fixing the box-sizing attribute will make things easier later. */
+html {
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	font-family: Helvetica, sans-serif;
+}
+
+body fieldset {
+	
+	align-items: 1;
+	display: flex;
+	flex-direction: column;
+	align-content: flex-start;
+}
+
+h1 {
+	align-self: center;
+	text-align: center;
+}
+
+fieldset {
+	border-color: rgb(68, 136, 204);
+	border-style: solid;
+	border-width: 2px;
+	margin: 10px;
+}
+
+/*fieldset#dice-area {
+	flex: 1;
+}
+
+fieldset#modifiers-area {
+	flex: 1;
+}*/
+
+/*fieldset#results-area {
+	display: inline-block;
+}
+
+fieldset#analysis-area {
+	display: inline-block;
+}*/
+
+legend {
+	
+}
+
+table {
+	display: flex;
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+
+<meta charset="UTF-8" />
+<title>Final Project </title>
+
+<!--
+CS 3312, spring 2016
+Final Project
+-->
+
+<!-- Import a CSS stylesheet to style the page. -->
+<link href="style.css" rel="stylesheet" />
+
+</head><body>
+
+<h1> Data Analysis of Dice Rolls </h1>
+
+<fieldset id="sim-area">
+   <legend>Simulate</legend>
+   <table style="width:100%">
+      <tr>
+         <td>Die</td>
+         <td>Quantity</td>
+         <td>Groups</td>
+         <td>Iterations</td>
+         <td>None</td>
+         <td>Top n - 1</td>
+         <td>Bottom n - 1</td>
+         <td></td>
+      </tr>
+      <tr>
+         <td><select id="select-menu">
+            <option value="4">d4</option>
+            <option value="6">d6</option>
+            <option value="8">d8</option>
+            <option value="10">d10</option>
+            <option value="100">d100</option>
+            <option value="12">d12</option>
+            <option value="20">d20</option>
+            </select>
+         </td>
+         <td><input id="quantity" type="number" value="1"</input></td>
+         <td><input id="groups" type="number" value="1"</input></td>
+         <td><input id="iterations" type="number" value="1"</input></td>
+         <td><input id="modifier-none" name="modifier" type="radio" checked></input></td>
+         <td><input id="modifier-top" name="modifier" type="radio"></input></td>
+         <td><input id="modifier-bottom" name="modifier" type="radio"></input></td>
+         <td><button id="roll" type="button">Roll</button></td>
+   </table>
+         
+</fieldset>
+
+<!-- <fieldset id="modifiers-area">
+	<legend>Modifiers</legend>
+	<input id="modifier-top" type="checkbox" name="modifier">Top</input>
+	<label>n - </label>
+	<input id="modifier-top-number" type="number"></input>
+	<input id="modifier-bottom" type="checkbox" name="modifier">Bottom</input>
+	<label>n - </label>
+	<input id="modifier-bottom-number" type="number"></input>
+</fieldset> -->
+
+<fieldset id="results-area">
+	<legend>Results</legend>
+	<textarea rows="10" cols="50" id="text-area"></textarea>
+	<button id="results-reset" type="button">Reset</button>
+</fieldset>
+
+
+
+<fieldset id="analysis-area">
+	<legend>Analysis</legend>
+   <canvas id="analysis-canvas"></canvas>
+	<button id="analysis-reset" type="button">Reset</button>
+</fieldset>
+
+<fieldset id="dice-area">
+	<legend>Dice Rolls</legend>
+	<table style="width:100%">
+		<tr>
+			<td>Die</td>
+			<td>Quantity</td>
+			<td>Groups</td>
+			<td>Iterations</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>d4</td>
+			<td><input id="quantity-d4" type="number" value="1"</input></td>
+			<td><input id="groups-d4" type="number" value="1"</input></td>
+			<td><input id="iterations-d4" type="number" value="1"</input></td>
+			<td><button id="roll-d4" type="button">Roll</button></td>
+		</tr>
+		<tr>
+			<td>d6</td>
+			<td><input id="quantity-d6" type="number" value="1"</input></td>
+			<td><input id="groups-d6" type="number" value="1"</input></td>
+			<td><input id="iterations-d6" type="number" value="1"</input></td>
+			<td><button id="roll-d6" type="button">Roll</button></td>
+		</tr>
+		<tr>
+			<td>d8</td>
+			<td><input id="quantity-d8" type="number" value="1"</input></td>
+			<td><input id="groups-d8" type="number" value="1"</input></td>
+			<td><input id="iterations-d8" type="number" value="1"</input></td>
+			<td><button id="roll-d8" type="button">Roll</button></td>
+		</tr>
+		<tr>
+			<td>d10</td>
+			<td><input id="quantity-d10" type="number" value="1"</input></td>
+			<td><input id="groups-d10" type="number" value="1"</input></td>
+			<td><input id="iterations=d10" type="number" value="1"</input></td>
+			<td><button id="roll-d10" type="button">Roll</button></td>
+		</tr>
+		<tr>
+			<td>d100</td>
+			<td><input id="quantity-d100" type="number" value="1"</input></td>
+			<td><input id="groups-d100" type="number" value="1"</input></td>
+			<td><input id="iterations-d100" type="number" value="1"</input></td>
+			<td><button id="roll-d100" type="button">Roll</button></td>
+		</tr>
+		<tr>
+			<td>d12</td>
+			<td><input id="quantity-d12" type="number" value="1"</input></td>
+			<td><input id="groups-d12" type="number" value="1"</input></td>
+			<td><input id="iterations-d12" type="number" value="1"</input></td>
+			<td><button id="roll-d12" type="button">Roll</button></td>
+		</tr>
+		<tr>
+			<td>d20</td>
+			<td><input id="quantity-d20" type="number" value="1"</input></td>
+			<td><input id="groups-d20" type="number" value="1"</input></td>
+			<td><input id="iterations-d20" type="number" value="1"</input></td>
+			<td><button id="roll-d20" type="button">Roll</button></td>
+		</tr>
+	</table>
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+<!-- Import a JavaScript script to add interactivity to the page. -->
+<script src="script.js"></script>
+
+</body></html>

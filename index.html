@@ -6,7 +6,7 @@
 
 <!--
 CS 3312, spring 2016
-Final Project test
+Final Project
 -->
 
 <!-- Import a CSS stylesheet to style the page. -->
@@ -25,8 +25,8 @@ Final Project test
          <td>Groups</td>
          <td>Iterations</td>
          <td>None</td>
-         <td>Top n - 1</td>
-         <td>Bottom n - 1</td>
+         <td>Top (n - 1)</td>
+         <td>Bottom (n - 1)</td>
          <td></td>
       </tr>
       <tr>
@@ -35,7 +35,7 @@ Final Project test
             <option value="6">d6</option>
             <option value="8">d8</option>
             <option value="10">d10</option>
-            <option value="100">d100</option>
+            <!-- <option value="100">d100</option> -->
             <option value="12">d12</option>
             <option value="20">d20</option>
             </select>
@@ -46,7 +46,7 @@ Final Project test
          <td><input id="modifier-none" name="modifier" type="radio" checked></input></td>
          <td><input id="modifier-top" name="modifier" type="radio"></input></td>
          <td><input id="modifier-bottom" name="modifier" type="radio"></input></td>
-         <td><button id="roll" type="button">Roll</button></td>
+         <td><button id="roll" type="button">Simulate</button></td>
    </table>
          
 </fieldset>
@@ -64,7 +64,7 @@ Final Project test
 <fieldset id="results-area">
 	<legend>Results</legend>
 	<textarea rows="10" cols="50" id="text-area"></textarea>
-	<button id="results-reset" type="button">Reset</button>
+	<!-- <button id="results-reset" type="button">Reset</button> -->
 </fieldset>
 
 
@@ -72,10 +72,10 @@ Final Project test
 <fieldset id="analysis-area">
 	<legend>Analysis</legend>
    <canvas id="analysis-canvas"></canvas>
-	<button id="analysis-reset" type="button">Reset</button>
+	<!-- <button id="analysis-reset" type="button">Reset</button> -->
 </fieldset>
 
-<fieldset id="dice-area">
+<!-- <fieldset id="dice-area">
 	<legend>Dice Rolls</legend>
 	<table style="width:100%">
 		<tr>
@@ -135,7 +135,7 @@ Final Project test
 			<td><button id="roll-d20" type="button">Roll</button></td>
 		</tr>
 	</table>
-</fieldset>
+</fieldset> -->
 
 
 

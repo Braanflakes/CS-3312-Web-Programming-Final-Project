@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Controller //
       (function () {
-         var simulation, textArea, analysisCanvas, analysisContext, newFrequency, selectedDie, die, quantity, groups, iterations, i, j, k, l, m, result, resultArray;
+         var simulation, textArea, analysisCanvas, analysisContext, newFrequency, selectedDie, die, quantity, groups, iterations, i, j, k, l, m, result, resultArray, barHeight;
 
          simulation = createSimulation();
          textArea = document.querySelector('#text-area');
@@ -74,12 +74,12 @@ document.addEventListener('DOMContentLoaded', function () {
          // Size the canvas.
          //analysisCanvas.width = analysisCanvas.clientWidth;
          analysisCanvas.width = screen.width - 100;
-         analysisCanvas.height = 500;
+         analysisCanvas.height = 500;  // default height
 
          // Update the view.
          updateCanvas = function (value) {
             // Declare vars
-            var numOfBars, barWidth, barHeight, previousBarHeight, barPositionX, barPositionY, textLocationX;
+            var numOfBars, barWidth, previousBarHeight, barPositionX, barPositionY, textLocationX;
             
             // Initialize vars
             numOfBars = (quantity * die) - (quantity - 1);
@@ -87,16 +87,16 @@ document.addEventListener('DOMContentLoaded', function () {
             barHeight = newFrequency[value - 1] += 1;
             previousBarHeight = barHeight - 1;
             barPositionX = barWidth * (value - 1);
-            barPositionY = 475;
+            barPositionY = analysisCanvas.height - 25;
             textLocationX = value + (quantity - 1);
             
             // Clear previous label
             analysisContext.fillStyle = 'rgb(255, 255, 255)';
-            analysisContext.fillText(newFrequency[value - 1] - 1, barPositionX + barWidth / 2, 500 - previousBarHeight - 30);
-            analysisContext.fillText(newFrequency[value - 1] - 1, barPositionX + barWidth / 2, 500 - previousBarHeight - 30);
-            analysisContext.fillText(newFrequency[value - 1] - 1, barPositionX + barWidth / 2, 500 - previousBarHeight - 30);
+            analysisContext.fillText(newFrequency[value - 1] - 1, barPositionX + barWidth / 2, analysisCanvas.height - previousBarHeight - 30);
+            analysisContext.fillText(newFrequency[value - 1] - 1, barPositionX + barWidth / 2, analysisCanvas.height - previousBarHeight - 30);
+            analysisContext.fillText(newFrequency[value - 1] - 1, barPositionX + barWidth / 2, analysisCanvas.height - previousBarHeight - 30);
             
-            analysisContext.fillText(textLocationX, barPositionX + barWidth / 2, 495);
+            analysisContext.fillText(textLocationX, barPositionX + barWidth / 2, analysisCanvas.height - 5);
 
             // Apply the update
             analysisContext.fillStyle = 'rgb(' + Math.floor(((Math.random() * 185) + 50)) + ', ' + Math.floor(((Math.random() * 185) + 50)) + ', ' + Math.floor(((Math.random() * 185) + 50)) + ')';
@@ -108,10 +108,10 @@ document.addEventListener('DOMContentLoaded', function () {
             analysisContext.textAlign = 'center';
             
             // Write new label
-            analysisContext.fillText(textLocationX, barPositionX + barWidth / 2, 495);
+            analysisContext.fillText(textLocationX, barPositionX + barWidth / 2, analysisCanvas.height - 5);
             
             // Write labels on top of the values
-            analysisContext.fillText(newFrequency[value - 1], barPositionX + barWidth / 2, 500 - barHeight - 30);
+            analysisContext.fillText(newFrequency[value - 1], barPositionX + barWidth / 2, analysisCanvas.height - barHeight - 30);
             
          };
 
@@ -156,12 +156,24 @@ document.addEventListener('DOMContentLoaded', function () {
                      resultArray.sort(function (a, b) {
                         return b - a;
                      });
-                     resultArray.pop();
+                     
+                     var modifier = document.querySelector('#modifier-value').value;
+                     
+                     for (var r = 0; r < modifier; r += 1) {
+                        resultArray.pop();
+                     }
                   }
 
                   if (document.querySelector('#modifier-bottom').checked) {
-                     resultArray.sort();
-                     resultArray.pop();
+                     resultArray.sort(function (a, b) {
+                        return a - b;
+                     });
+                     
+                     var modifier = document.querySelector('#modifier-value').value;
+                     
+                     for (var r = 0; r < modifier; r += 1) {
+                        resultArray.pop();
+                     }
                   }
 
                   for (l = 0; l < resultArray.length; l += 1) {

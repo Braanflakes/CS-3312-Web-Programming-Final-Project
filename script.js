@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
    // Simulate //
    (function () {
-      var createSimulation;
+      var createSimulation, createFrequencyAnalysis, updateCanvas;
 
       createSimulation = function () {
          var self, state;
@@ -48,23 +48,95 @@ document.addEventListener('DOMContentLoaded', function () {
          return self;
       };
 
-      // View //
+      createFrequencyAnalysis = function (iterations) {
+         var newFrequency, i;
+         newFrequency = {};
+         
+         for (i = 0; i < iterations; i += 1) {
+            newFrequency[i] = 0;
+         }
+
+         return newFrequency;
+      };
 
       // Controller //
       (function () {
-         var simulation, textArea, selectedDie, die, quantity, groups, iterations, i, j, k, l, result, resultArray;
+         var simulation, textArea, analysisCanvas, analysisContext, newFrequency, selectedDie, die, quantity, groups, iterations, i, j, k, l, m, result, resultArray;
 
          simulation = createSimulation();
          textArea = document.querySelector('#text-area');
          resultArray = [];
 
+         // Get the canvas object and its two-dimensional rendering context.
+         analysisCanvas = document.querySelector('#analysis-canvas');
+         analysisContext = analysisCanvas && analysisCanvas.getContext && analysisCanvas.getContext('2d');
+
+         // Size the canvas.
+         //analysisCanvas.width = analysisCanvas.clientWidth;
+         analysisCanvas.width = screen.width - 100;
+         analysisCanvas.height = 500;
+
+         // Update the view.
+         updateCanvas = function (value) {
+            // Declare vars
+            var numOfBars, barWidth, barHeight, previousBarHeight, barPositionX, barPositionY, textLocationX;
+            
+            // Initialize vars
+            numOfBars = (quantity * die) - (quantity - 1);
+            barWidth = analysisCanvas.width / numOfBars;
+            barHeight = newFrequency[value - 1] += 1;
+            previousBarHeight = barHeight - 1;
+            barPositionX = barWidth * (value - 1);
+            barPositionY = 475;
+            textLocationX = value + (quantity - 1);
+            
+            // Clear previous label
+            analysisContext.fillStyle = 'rgb(255, 255, 255)';
+            analysisContext.fillText(newFrequency[value - 1] - 1, barPositionX + barWidth / 2, 500 - previousBarHeight - 30);
+            analysisContext.fillText(newFrequency[value - 1] - 1, barPositionX + barWidth / 2, 500 - previousBarHeight - 30);
+            analysisContext.fillText(newFrequency[value - 1] - 1, barPositionX + barWidth / 2, 500 - previousBarHeight - 30);
+            
+            analysisContext.fillText(textLocationX, barPositionX + barWidth / 2, 495);
+
+            // Apply the update
+            analysisContext.fillStyle = 'rgb(' + Math.floor(((Math.random() * 185) + 50)) + ', ' + Math.floor(((Math.random() * 185) + 50)) + ', ' + Math.floor(((Math.random() * 185) + 50)) + ')';
+            analysisContext.fillRect(barPositionX, barPositionY, barWidth, -barHeight);
+            
+            // Set label information
+            analysisContext.fillStyle = 'rgb(0, 0, 0)';
+            analysisContext.font = '12px sans-serif';
+            analysisContext.textAlign = 'center';
+            
+            // Write new label
+            analysisContext.fillText(textLocationX, barPositionX + barWidth / 2, 495);
+            
+            // Write labels on top of the values
+            analysisContext.fillText(newFrequency[value - 1], barPositionX + barWidth / 2, 500 - barHeight - 30);
+            
+         };
+
          // Run simulation when button is clicked.
-         document.querySelector('#roll').addEventListener('click', function () {
+         document.querySelector('#roll').addEventListener('click', function () {         
             selectedDie = document.querySelector('#select-menu');
             die = selectedDie.value;
             quantity = document.querySelector('#quantity').value;
             groups = document.querySelector('#groups').value;
             iterations = document.querySelector('#iterations').value;
+            newFrequency = createFrequencyAnalysis((quantity * die) - (quantity - 1));
+
+            // reset the canvas
+            analysisContext.fillStyle = 'rgb(255, 255, 255)';
+            analysisContext.fillRect(0, 0, analysisCanvas.width, analysisCanvas.height);
+            
+            // draw labels
+            /*for (var key in newFrequency) {
+               if (newFrequency.hasOwnProperty(key)) {
+                  analysisContext.fillText(newFrequency[key - 1], barPositionX + barWidth / 2, 300 - barHeight - 10);
+               }
+            }*/
+            
+            // reset the previous results
+            textArea.textContent = '';
 
             for (i = 0; i < iterations; i += 1) {
                textArea.textContent += 'Iteration ' + (i + 1) + ' (d' + die + ') ' + '\n';
@@ -73,28 +145,26 @@ document.addEventListener('DOMContentLoaded', function () {
                   textArea.textContent += 'Group ' + (j + 1) + '\n';
                   textArea.textContent += quantity + 'd' + die + ': ';
                   simulation.setQuantityTotal(0);  // reset the quantity total
-                  resultArray = [];
+                  resultArray = []; // reset the result array
                   for (k = 0; k < quantity; k += 1) {
                      result = simulation.rollDie(die);
                      resultArray.push(result);
-                     //simulation.setQuantityTotal(simulation.getQuantityTotal() + result);
                      textArea.textContent += result;
                   }
 
                   if (document.querySelector('#modifier-top').checked) {
-                     resultArray.sort(function(a, b) {
+                     resultArray.sort(function (a, b) {
                         return b - a;
                      });
                      resultArray.pop();
                   }
-                  
+
                   if (document.querySelector('#modifier-bottom').checked) {
                      resultArray.sort();
                      resultArray.pop();
                   }
-                  
+
                   for (l = 0; l < resultArray.length; l += 1) {
-                     textArea.textContent += '\n' + resultArray[l];
                      simulation.setQuantityTotal(simulation.getQuantityTotal() + resultArray[l]);
                   }
 
@@ -103,7 +173,12 @@ document.addEventListener('DOMContentLoaded', function () {
                }
                textArea.textContent += 'Iteration total: ' + simulation.getGroupTotal() + '\n';
                textArea.textContent += '\n';
+               
+               newFrequency[i] += simulation.getGroupTotal();
+               updateCanvas(Math.round(simulation.getGroupTotal() / groups) - (quantity - 1));
             }
+            
+            createFrequencyAnalysis(0);
 
          });
 

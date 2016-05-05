@@ -22,8 +22,7 @@ body fieldset {
 	
 	align-items: 1;
 	display: flex;
-	flex-direction: row;
-   flex-wrap: wrap;
+	flex-direction: column;
 	align-content: flex-start;
 }
 
@@ -54,6 +53,10 @@ fieldset#modifiers-area {
 fieldset#analysis-area {
 	display: inline-block;
 }*/
+
+legend {
+	
+}
 
 table {
 	display: flex;

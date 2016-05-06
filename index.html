@@ -7,6 +7,7 @@
 <!--
 CS 3312, spring 2016
 Final Project
+Brendan Murphey, Dobby Maxwell
 -->
 
 <!-- Import a CSS stylesheet to style the page. -->
@@ -25,8 +26,8 @@ Final Project
          <td>Groups</td>
          <td>Iterations</td>
          <td>None</td>
-         <td>Top n - </td>
-         <td>Bottom n - </td>
+         <td>Top (n - X)</td>
+         <td>Bottom (n - X)</td>
          <td></td>
       </tr>
       <tr>
@@ -35,7 +36,6 @@ Final Project
             <option value="6">d6</option>
             <option value="8">d8</option>
             <option value="10">d10</option>
-            <!-- <option value="100">d100</option> -->
             <option value="12">d12</option>
             <option value="20">d20</option>
             </select>
@@ -44,13 +44,14 @@ Final Project
          <td><input id="groups" type="number" value="1"</input></td>
          <td><input id="iterations" type="number" value="1"</input></td>
          <td><input id="modifier-none" name="modifier" type="radio" checked></input></td>
-         <td><input id="modifier-top" name="modifier" type="radio"></input><input id="modifier-value" type="number" value="0"></input></td>
-         <td><input id="modifier-bottom" name="modifier" type="radio"></input><input id="modifier-value" type="number" value="0"></input></td>
+         <td><input id="modifier-top" name="modifier" type="radio"></input><input id="modifier-top-value" type="number" value="0"></input></td>
+         <td><input id="modifier-bottom" name="modifier" type="radio"></input><input id="modifier-bottom-value" type="number" value="0"></input></td>
          <td><button id="roll" type="button">Simulate</button></td>
    </table>
          
 </fieldset>
 
+<!-- Decided against this extra area and combined it with the 'simulate' area. Keeping this in for a future version of this page. -->
 <!-- <fieldset id="modifiers-area">
 	<legend>Modifiers</legend>
 	<input id="modifier-top" type="checkbox" name="modifier">Top</input>
@@ -63,7 +64,7 @@ Final Project
 
 <fieldset id="results-area">
 	<legend>Results</legend>
-	<textarea rows="10" cols="50" id="text-area"></textarea>
+	<textarea rows="11" cols="83" id="text-area"></textarea>
 	<!-- <button id="results-reset" type="button">Reset</button> -->
 </fieldset>
 
@@ -75,6 +76,7 @@ Final Project
 	<!-- <button id="analysis-reset" type="button">Reset</button> -->
 </fieldset>
 
+<!-- Going to use this in a future version of this page. This is specific to Dungeons and Dragons. -->
 <!-- <fieldset id="dice-area">
 	<legend>Dice Rolls</legend>
 	<table style="width:100%">
@@ -136,15 +138,6 @@ Final Project
 		</tr>
 	</table>
 </fieldset> -->
-
-
-
-
-
-
-
-
-
 
 <!-- Import a JavaScript script to add interactivity to the page. -->
 <script src="script.js"></script>
